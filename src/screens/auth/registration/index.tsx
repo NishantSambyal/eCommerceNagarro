@@ -1,11 +1,14 @@
-import {View, Text} from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
+import BaseScreen from '../../../components/BaseScreen';
 
 const Registration = () => {
   return (
-    <View>
-      <Text> Registration </Text>
-    </View>
+    <BaseScreen header title="Registration">
+      <View>
+        <Text>Registration</Text>
+      </View>
+    </BaseScreen>
   );
 };
 

@@ -4,10 +4,12 @@ import { AppImages } from '../../../assets';
 import styles from './styles';
 import { AppButton, AppTextInput } from '../../../components';
 import BaseScreen from '../../../components/BaseScreen';
+import { useMyNavigation } from '../../../navigation/useMyNavigation';
 
 const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const navigation = useMyNavigation();
   return (
     <BaseScreen>
       <View style={styles.bottomContainer}>
@@ -32,7 +34,9 @@ const Login = () => {
           title={'Login'}
           onPress={() => {}}
         />
-        <TouchableOpacity style={styles.newUserView}>
+        <TouchableOpacity
+          style={styles.newUserView}
+          onPress={() => navigation.navigate('Registration')}>
           <Text style={styles.newUserText}>New User? Register Here</Text>
         </TouchableOpacity>
       </View>
