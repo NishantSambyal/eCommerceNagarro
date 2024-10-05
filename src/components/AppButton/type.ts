@@ -4,4 +4,5 @@ export interface IProps {
   title: string;
   style?: ViewStyle;
   onPress: () => void;
+  loading?: boolean;
 }

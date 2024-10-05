@@ -2741,6 +2741,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-native-bcrypt@npm:^2.4.6":
+  version: 2.4.6
+  resolution: "@types/react-native-bcrypt@npm:2.4.6"
+  checksum: 0374cbf81f24b8302b88b413a1231bd53f13374fb7e7f0e5dd72b91f296f3ffec3a169f606773ab44b058d5a5dbfc8123cd517d5ed682119e32caa89a5826849
+  languageName: node
+  linkType: hard
+
+"@types/react-native-sqlite-storage@npm:^6.0.5":
+  version: 6.0.5
+  resolution: "@types/react-native-sqlite-storage@npm:6.0.5"
+  checksum: 192d4c3e2d93ea59f59387b8eb8d0aca3da32acca441aa5f84b2f4d919fc52aaa088ab5eb319ceec8471e58107d7463c56c733bfe5ff58915ac03b45313b6450
+  languageName: node
+  linkType: hard
+
 "@types/react-test-renderer@npm:^18.0.0":
   version: 18.3.0
   resolution: "@types/react-test-renderer@npm:18.3.0"
@@ -4219,6 +4233,8 @@ __metadata:
     "@react-navigation/native-stack": next
     "@react-navigation/stack": next
     "@types/react": ^18.2.6
+    "@types/react-native-bcrypt": ^2.4.6
+    "@types/react-native-sqlite-storage": ^6.0.5
     "@types/react-test-renderer": ^18.0.0
     babel-jest: ^29.6.3
     eslint: ^8.19.0
