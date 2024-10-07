@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../../utils/colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    // padding: 16,
     backgroundColor: '#f4f4f4', // Light background color for better contrast
   },
   orderCard: {
@@ -45,6 +46,13 @@ const styles = StyleSheet.create({
     color: '#fff', // White text for the button
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  seeAllText: {
+    textAlign: 'right',
+    fontSize: 14,
+    textDecorationLine: 'underline',
+    color: colors.red.v4,
+    margin: 10,
   },
 });
 

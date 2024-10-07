@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { fetchOrderHistory } from '../../../database/orders';
 import styles from './styles';
+import OrderTracking from '../../../components/orderTracking';
 
 const OrderList = ({ userId }) => {
   const [orders, setOrders] = useState([]);
@@ -20,29 +21,34 @@ const OrderList = ({ userId }) => {
   }, [userId]);
 
   const handleSeeMore = () => {
-    navigation.navigate('AllOrders', { orders });
+    navigation.navigate('MyOrders', { orders });
   };
 
-  return (
-    <View style={styles.container}>
-      {/* Show latest order */}
-      {latestOrder && (
-        <View style={styles.orderCard}>
-          <Text style={styles.title}>Latest Order</Text>
-          <Text>Status: {latestOrder.status}</Text>
-          <Text>Total: ₹ {latestOrder.total_amount.toFixed(2)}</Text>
-          <Text>Date: {new Date(latestOrder.order_date).toLocaleString()}</Text>
-        </View>
-      )}
-
-      {/* Show See More Button if there are more than one order */}
+  return orders ? (
+    <View>
       {orders.length > 1 && (
-        <TouchableOpacity style={styles.seeMoreButton} onPress={handleSeeMore}>
-          <Text style={styles.seeMoreText}>See More</Text>
+        <TouchableOpacity onPress={handleSeeMore}>
+          <Text style={styles.seeAllText}>
+            {`See more (${orders.length})`}{' '}
+          </Text>
         </TouchableOpacity>
       )}
+      <View style={styles.container}>
+        {/* Show latest order */}
+        {latestOrder && (
+          <View style={styles.orderCard}>
+            <Text style={styles.title}>Latest Order</Text>
+            <Text>Status: {latestOrder.status}</Text>
+            <Text>Total: ₹ {latestOrder.total_amount.toFixed(2)}</Text>
+            <Text>
+              Date: {new Date(latestOrder.order_date).toLocaleString()}
+            </Text>
+            <OrderTracking currentStatus={latestOrder.status} />
+          </View>
+        )}
+      </View>
     </View>
-  );
+  ) : null;
 };
 
 export default OrderList;

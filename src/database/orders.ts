@@ -72,6 +72,28 @@ export const createOrderItemsTable = async () => {
     });
   });
 };
+export const fetchOrderItems = async orderId => {
+  const db = await openDatabase();
+
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM order_items WHERE order_id = ?',
+        [orderId],
+        (tx, results) => {
+          const items = [];
+          for (let i = 0; i < results.rows.length; i++) {
+            items.push(results.rows.item(i));
+          }
+          resolve(items);
+        },
+        (tx, error) => {
+          reject(error);
+        },
+      );
+    });
+  });
+};
 
 export const placeOrder = async (userId, cartItems, totalAmount) => {
   const db = await openDatabase();

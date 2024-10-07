@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { logoutUserR } from '../../../redux/reducers/slices/userSlice';
+import { useSelector } from 'react-redux';
 import {
   createProductsTable,
   insertProducts,
@@ -20,8 +19,6 @@ import styles from './styles';
 import { AppProducts } from '../../../assets';
 import BaseScreen from '../../../components/BaseScreen';
 import { RootState } from '../../../redux/store';
-import HeaderComponent from './Header';
-import FooterComponent from './Footer';
 import { myAlertBox } from '../../../utils/alert';
 import { createOrderTables, fetchOrderHistory } from '../../../database/orders';
 import OrderList from '../orderList';
@@ -49,8 +46,6 @@ const Home = () => {
       console.log(JSON.stringify(orders, null, 4)),
     );
   }, []);
-
-  // Fetch cart items whenever the user ID changes
   useEffect(() => {
     const fetchCart = async () => {
       const updatedCartItems = await fetchCartItems(userReducer.data.id);
@@ -143,7 +138,6 @@ const Home = () => {
             // <HeaderComponent onClearCart={handleClearCart} />
             <OrderList userId={userReducer.data.id} />
           }
-          ListFooterComponent={FooterComponent}
         />
       </View>
     </BaseScreen>
