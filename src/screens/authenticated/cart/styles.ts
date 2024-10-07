@@ -94,10 +94,16 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   itemTitle: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 'bold',
     color: colors.black.v1,
     marginLeft: 10,
+  },
+  itemPrice: {
+    fontSize: 12,
+    color: colors.black.v3,
+    marginLeft: 10,
+    marginTop: 6,
   },
   plus: {
     fontSize: 20,
@@ -119,8 +125,9 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.red.v3,
     position: 'absolute',
-    bottom: 10,
-    width: '80%',
+    bottom: 20,
+    height: 50,
+    width: '92%',
     alignSelf: 'center',
   },
 });

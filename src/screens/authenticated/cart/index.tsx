@@ -18,12 +18,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import styles from './styles';
 import { AppIcons, AppProducts } from '../../../assets';
-import colors from '../../../utils/colors';
 import { AppButton } from '../../../components';
+
+const HANDLING_CHARGES = 9.99;
+const DELIVERY_CHARGES = 27;
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
-
   const userReducer = useSelector((state: RootState) => state.UserReducer);
 
   useEffect(() => {
@@ -39,9 +40,7 @@ const Cart = () => {
 
   const handleAddToCart = async item => {
     await addToCart(userReducer.data.id, item.id);
-    console.log(userReducer.data.id, item.id);
     const updatedCartItems = await fetchCartItems(userReducer.data.id);
-    console.log('updatedCartItems', updatedCartItems);
     setCart(updatedCartItems); // Update the cart state with fresh data
   };
 
@@ -49,6 +48,12 @@ const Cart = () => {
     await removeFromCart(userReducer.data.id, item.id);
     const updatedCartItems = await fetchCartItems(userReducer.data.id);
     setCart(updatedCartItems); // Update the cart state with fresh data
+  };
+
+  // Function to calculate total cart price
+  const calculateTotal = () => {
+    let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    return total;
   };
 
   const renderItem = ({ item }) => {
@@ -60,7 +65,10 @@ const Cart = () => {
       <View style={styles.listWrapper}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Image source={img} style={styles.image} />
-          <Text style={styles.itemTitle}>{item?.name}</Text>
+          <View>
+            <Text style={styles.itemTitle}>{item?.name}</Text>
+            <Text style={styles.itemPrice}>₹ {item?.price}</Text>
+          </View>
         </View>
         <View style={styles.listItemWrapper}>
           <TouchableOpacity onPress={() => handleRemoveFromCart(item)}>
@@ -74,6 +82,10 @@ const Cart = () => {
       </View>
     );
   };
+
+  // Calculate total cost including charges
+  const totalCartPrice = calculateTotal();
+  const totalAmountToPay = totalCartPrice + HANDLING_CHARGES + DELIVERY_CHARGES;
 
   return (
     <BaseScreen
@@ -108,20 +120,22 @@ const Cart = () => {
             </View>
             <View style={styles.billWrapper}>
               <Text style={styles.billLabel}>Item Total & GST</Text>
-              <Text style={styles.billAmount}>₹ 200</Text>
+              <Text style={styles.billAmount}>
+                ₹ {totalCartPrice.toFixed(2)}
+              </Text>
             </View>
             <View style={styles.billWrapper}>
               <Text style={styles.billLabel}>Handling Charges</Text>
-              <Text style={styles.billAmount}>₹ 9.99</Text>
+              <Text style={styles.billAmount}>₹ {HANDLING_CHARGES}</Text>
             </View>
             <View style={styles.billWrapper}>
               <Text style={styles.billLabel}>Delivery Charges</Text>
-              <Text style={styles.billAmount}>₹ 27</Text>
+              <Text style={styles.billAmount}>₹ {DELIVERY_CHARGES}</Text>
             </View>
             <View style={styles.divider} />
             <View style={styles.billWrapper}>
               <Text style={styles.toPayLabel}>To Pay</Text>
-              <Text style={styles.toPay}>₹ 480</Text>
+              <Text style={styles.toPay}>₹ {totalAmountToPay.toFixed(2)}</Text>
             </View>
             <Text style={styles.included}>Included all taxes and charges</Text>
           </View>
