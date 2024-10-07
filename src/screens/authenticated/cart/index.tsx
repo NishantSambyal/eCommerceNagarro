@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import BaseScreen from '../../../components/BaseScreen';
 import {
   addToCart,
+  clearCart,
   fetchCartItems,
   getTotalCartItems,
   removeFromCart,
@@ -19,12 +20,16 @@ import { RootState } from '../../../redux/store';
 import styles from './styles';
 import { AppIcons, AppProducts } from '../../../assets';
 import { AppButton } from '../../../components';
+import { placeOrder } from '../../../database/orders';
+import { myAlertBox } from '../../../utils/alert';
+import { useMyNavigation } from '../../../navigation/useMyNavigation';
 
 const HANDLING_CHARGES = 9.99;
 const DELIVERY_CHARGES = 27;
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
+  const navigation = useMyNavigation();
   const userReducer = useSelector((state: RootState) => state.UserReducer);
 
   useEffect(() => {
@@ -54,6 +59,23 @@ const Cart = () => {
   const calculateTotal = () => {
     let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     return total;
+  };
+
+  const handlePlaceOrder = async () => {
+    try {
+      await placeOrder(userReducer.data.id, cart, totalAmountToPay.toFixed(2));
+      myAlertBox({
+        title: 'Order Placed',
+        description: 'Order placed successfully',
+        onPress: async () => {
+          await clearCart(userReducer.data.id);
+          setCart([]);
+          navigation.goBack();
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const renderItem = ({ item }) => {
@@ -141,7 +163,11 @@ const Cart = () => {
           </View>
         </View>
       </ScrollView>
-      <AppButton style={styles.button} title="Place Order" onPress={() => {}} />
+      <AppButton
+        style={styles.button}
+        title="Place Order"
+        onPress={handlePlaceOrder}
+      />
     </BaseScreen>
   );
 };

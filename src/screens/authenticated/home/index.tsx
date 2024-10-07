@@ -23,6 +23,8 @@ import { RootState } from '../../../redux/store';
 import HeaderComponent from './Header';
 import FooterComponent from './Footer';
 import { myAlertBox } from '../../../utils/alert';
+import { createOrderTables, fetchOrderHistory } from '../../../database/orders';
+import OrderList from '../orderList';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -33,12 +35,19 @@ const Home = () => {
     createProductsTable();
     insertProducts();
     createCartTable();
+    createOrderTables();
     createInventory;
   }, []);
 
   // Fetch products
   useEffect(() => {
     fetchProducts().then(product => setProducts(product));
+  }, []);
+
+  useEffect(() => {
+    fetchOrderHistory(userReducer.data.id).then(orders =>
+      console.log(JSON.stringify(orders, null, 4)),
+    );
   }, []);
 
   // Fetch cart items whenever the user ID changes
@@ -131,7 +140,8 @@ const Home = () => {
           numColumns={2}
           contentContainerStyle={styles.grid}
           ListHeaderComponent={
-            <HeaderComponent onClearCart={handleClearCart} />
+            // <HeaderComponent onClearCart={handleClearCart} />
+            <OrderList userId={userReducer.data.id} />
           }
           ListFooterComponent={FooterComponent}
         />
