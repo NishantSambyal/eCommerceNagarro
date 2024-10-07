@@ -16,7 +16,7 @@ const App = () => {
     fonts: {},
     colors: {
       ...DefaultTheme.colors,
-      background: colors.white.v1,
+      // background: colors.white.v1,
       // Add other color mappings here if necessary
     },
   };

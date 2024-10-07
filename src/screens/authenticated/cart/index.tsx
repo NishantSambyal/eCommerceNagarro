@@ -12,6 +12,7 @@ import { RootState } from '../../../redux/store';
 import styles from './styles';
 import { AppIcons, AppProducts } from '../../../assets';
 import colors from '../../../utils/colors';
+import { AppButton } from '../../../components';
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
@@ -84,17 +85,50 @@ const Cart = () => {
       title={'My Cart'}
       cartCount={getTotalCartItems(cart)}>
       <View style={styles.mainContainer}>
-        <View style={styles.deliveryContainer}>
-          <Image source={AppIcons.stopwatch} />
-          <Text style={styles.deliveryTitle}>Delivery in 30 minutes</Text>
+        <View style={styles.section}>
+          <View style={styles.deliveryContainer}>
+            <Image source={AppIcons.stopwatch} />
+            <Text style={styles.deliveryTitle}>Delivery in 30 minutes</Text>
+          </View>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={cart}
+            renderItem={renderItem}
+            keyExtractor={item => item.id.toString()}
+          />
         </View>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={cart}
-          renderItem={renderItem}
-          keyExtractor={item => item.id.toString()}
-        />
+        <View style={styles.section}>
+          <View style={styles.deliveryContainer}>
+            <Image source={AppIcons.coupon} />
+            <Text style={styles.couponTitle}>View Coupons and Offers</Text>
+          </View>
+        </View>
+        <View style={styles.section}>
+          <View style={styles.deliveryContainer}>
+            <Image source={AppIcons.bill} />
+            <Text style={styles.couponTitle}>Bill Summary</Text>
+          </View>
+          <View style={styles.billWrapper}>
+            <Text style={styles.billLabel}>Item Total & GST</Text>
+            <Text style={styles.billAmount}>₹ 200</Text>
+          </View>
+          <View style={styles.billWrapper}>
+            <Text style={styles.billLabel}>Handling Charges</Text>
+            <Text style={styles.billAmount}>₹ 9.99</Text>
+          </View>
+          <View style={styles.billWrapper}>
+            <Text style={styles.billLabel}>Delivery Charges</Text>
+            <Text style={styles.billAmount}>₹ 27</Text>
+          </View>
+          <View style={styles.divider} />
+          <View style={styles.billWrapper}>
+            <Text style={styles.toPayLabel}>To Pay</Text>
+            <Text style={styles.toPay}>₹ 480</Text>
+          </View>
+          <Text style={styles.included}>Included all taxes and charges</Text>
+        </View>
       </View>
+      <AppButton title="Checkout" onPress={() => {}} />
     </BaseScreen>
   );
 };

@@ -5,6 +5,8 @@ const colors = {
   black: {
     v1: '#000000',
     v2: '#B5B6B6',
+    v3: '#808080',
+    v4: '#DCDCDC',
   },
   blue: {
     v1: '#001151',
