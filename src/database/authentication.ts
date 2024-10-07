@@ -2,7 +2,7 @@ import SQLite, { SQLiteDatabase } from 'react-native-sqlite-storage';
 import bcrypt from 'react-native-bcrypt';
 
 // Open the database
-const openDatabase = (): Promise<SQLiteDatabase> => {
+export const openDatabase = (): Promise<SQLiteDatabase> => {
   return new Promise((resolve, reject) => {
     const db = SQLite.openDatabase(
       { name: 'userDatabase.db' },
@@ -50,14 +50,13 @@ export const registerUser = async (
   });
 };
 
-// Function to login user
 export const loginUser = async (email: string, password: string) => {
   const db = await openDatabase();
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'SELECT password FROM users WHERE email = ?',
+        'SELECT id, email, full_name, password FROM users WHERE email = ?',
         [email],
         (tx, results) => {
           if (results.rows.length > 0) {
@@ -68,12 +67,18 @@ export const loginUser = async (email: string, password: string) => {
             );
 
             if (isPasswordValid) {
-              resolve(true);
+              // Return user details excluding password
+              const userDetails = {
+                id: results.rows.item(0).id,
+                email: results.rows.item(0).email,
+                fullName: results.rows.item(0).full_name,
+              };
+              resolve(userDetails);
             } else {
-              resolve(false);
+              resolve(null); // Password is invalid
             }
           } else {
-            resolve(false);
+            resolve(null); // User not found
           }
         },
         error => {

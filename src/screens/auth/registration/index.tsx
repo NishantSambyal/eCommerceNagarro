@@ -8,10 +8,10 @@ import { useMyNavigation } from '../../../navigation/useMyNavigation';
 import { registerUser } from '../../../database/authentication';
 
 const Registration = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const [fullName, setFullName] = useState<string>('');
+  const [email, setEmail] = useState<string>('nishant@gmail.com');
+  const [password, setPassword] = useState<string>('password');
+  const [confirmPassword, setConfirmPassword] = useState<string>('password');
+  const [fullName, setFullName] = useState<string>('Nishant Sambyal');
   const [loading, setLoading] = useState<boolean>(false);
 
   const navigation = useMyNavigation();

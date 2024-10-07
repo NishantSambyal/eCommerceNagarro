@@ -10,6 +10,10 @@ const colors = {
     v1: '#001151',
     v2: '#101828',
   },
+  red: {
+    v1: '#F798A480',
+    v2: '#f798a4',
+  },
 };
 
 export default colors;

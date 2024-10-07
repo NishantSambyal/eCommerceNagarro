@@ -1,0 +1,60 @@
+import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  grid: {
+    padding: 10,
+  },
+  productContainer: {
+    margin: 5,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 10,
+    elevation: 2,
+  },
+  cardContainer: {
+    shadowColor: 'rgba(0, 0, 0, 0.8)',
+    shadowOpacity: 0.5,
+    alignSelf: 'stretch',
+    shadowOffset: { x: 10, y: 10 },
+    backgroundColor: 'white',
+    marginTop: 20,
+    marginHorizontal: 10,
+  },
+  image: {
+    width: 140,
+    height: 140,
+    resizeMode: 'cover',
+    borderRadius: 10,
+  },
+  productName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginVertical: 5,
+  },
+  productPrice: {
+    fontSize: 14,
+    color: '#888',
+  },
+  cartContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  button: {
+    backgroundColor: '#007bff',
+    borderRadius: 5,
+    padding: 10,
+    width: 30,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  quantity: {
+    fontSize: 16,
+  },
+});
+
+export default styles;

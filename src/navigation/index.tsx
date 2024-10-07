@@ -1,10 +1,13 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import * as Components from '../screens';
+import { RootState } from '../redux/store';
+import { useSelector } from 'react-redux';
 
 const Route = () => {
   const Stack = createNativeStackNavigator();
-  const isLogin = false;
+  const userReducer = useSelector((state: RootState) => state.UserReducer);
+  const isLogin = userReducer.data ? true : false;
 
   const renderHomeStack = () => {
     return (

@@ -9,18 +9,34 @@ const BaseScreen: FC<IProps | IPropsWithoutHeader> = ({
   children,
   title,
   header = false,
+  scrollEnabled = true,
+  noBackButton = false,
+  cartCount,
 }) => {
   return (
     <SafeAreaView
       edges={['right', 'left', 'top']}
       style={[styles.container, styles.mainContainer]}>
-      {header && <Header title={title!} />}
+      {header && (
+        <Header
+          title={title!}
+          noBackButton={noBackButton}
+          cartCount={cartCount}
+        />
+      )}
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <ScrollView contentContainerStyle={styles.viewContainer}>
+        {scrollEnabled ? (
+          <ScrollView contentContainerStyle={styles.viewContainer}>
+            {children}
+          </ScrollView>
+        ) : (
+          children
+        )}
+        {/* <ScrollView contentContainerStyle={styles.viewContainer}>
           {children}
-        </ScrollView>
+        </ScrollView> */}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

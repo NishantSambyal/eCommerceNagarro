@@ -6,18 +6,23 @@ import { AppButton, AppTextInput } from '../../../components';
 import BaseScreen from '../../../components/BaseScreen';
 import { useMyNavigation } from '../../../navigation/useMyNavigation';
 import { loginUser } from '../../../database/authentication';
+import { useDispatch } from 'react-redux';
+import { loginUserR } from '../../../redux/reducers/slices/userSlice';
 
 const Login = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>('nishant@gmail.com');
+  const [password, setPassword] = useState<string>('password');
   const [loading, setLoading] = useState<boolean>(false);
   const navigation = useMyNavigation();
+  const dispatch = useDispatch();
 
   const handleLogin = async () => {
     try {
       setLoading(true);
-      const isValid = await loginUser(email, password);
-      if (isValid) {
+      const userDetails = await loginUser(email, password);
+      if (userDetails) {
+        dispatch(loginUserR(userDetails));
+        console.log(JSON.stringify(userDetails));
         Alert.alert('Login successful');
         // navigation.navigate('Home'); // Navigate to authenticated home screen
       } else {

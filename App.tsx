@@ -7,6 +7,8 @@ import {
 } from '@react-navigation/native';
 import Route from './src/navigation';
 import colors from './src/utils/colors';
+import { Provider } from 'react-redux';
+import { store } from './src/redux/store';
 
 const App = () => {
   const navigationTheme: NavigationTheme = {
@@ -20,10 +22,12 @@ const App = () => {
   };
 
   return (
-    <NavigationContainer theme={navigationTheme}>
-      <StatusBar backgroundColor={'#ff0000'} />
-      <Route />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer theme={navigationTheme}>
+        <StatusBar backgroundColor={'#ff0000'} />
+        <Route />
+      </NavigationContainer>
+    </Provider>
   );
 };
 
