@@ -1,4 +1,11 @@
-import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import BaseScreen from '../../../components/BaseScreen';
 import {
@@ -55,17 +62,7 @@ const Cart = () => {
           <Image source={img} style={styles.image} />
           <Text style={styles.itemTitle}>{item?.name}</Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            backgroundColor: colors.red.v1,
-            paddingVertical: 4,
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            borderColor: colors.red.v1,
-            borderWidth: 1,
-            borderRadius: 6,
-          }}>
+        <View style={styles.listItemWrapper}>
           <TouchableOpacity onPress={() => handleRemoveFromCart(item)}>
             <Text style={styles.minus}>-</Text>
           </TouchableOpacity>
@@ -84,51 +81,53 @@ const Cart = () => {
       header
       title={'My Cart'}
       cartCount={getTotalCartItems(cart)}>
-      <View style={styles.mainContainer}>
-        <View style={styles.section}>
-          <View style={styles.deliveryContainer}>
-            <Image source={AppIcons.stopwatch} />
-            <Text style={styles.deliveryTitle}>Delivery in 30 minutes</Text>
+      <ScrollView>
+        <View style={styles.mainContainer}>
+          <View style={styles.section}>
+            <View style={styles.deliveryContainer}>
+              <Image source={AppIcons.stopwatch} />
+              <Text style={styles.deliveryTitle}>Delivery in 30 minutes</Text>
+            </View>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={cart}
+              renderItem={renderItem}
+              keyExtractor={item => item.id.toString()}
+            />
           </View>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={cart}
-            renderItem={renderItem}
-            keyExtractor={item => item.id.toString()}
-          />
+          <View style={styles.section}>
+            <View style={styles.deliveryContainer}>
+              <Image source={AppIcons.coupon} />
+              <Text style={styles.couponTitle}>View Coupons and Offers</Text>
+            </View>
+          </View>
+          <View style={styles.section}>
+            <View style={styles.deliveryContainer}>
+              <Image source={AppIcons.bill} />
+              <Text style={styles.couponTitle}>Bill Summary</Text>
+            </View>
+            <View style={styles.billWrapper}>
+              <Text style={styles.billLabel}>Item Total & GST</Text>
+              <Text style={styles.billAmount}>₹ 200</Text>
+            </View>
+            <View style={styles.billWrapper}>
+              <Text style={styles.billLabel}>Handling Charges</Text>
+              <Text style={styles.billAmount}>₹ 9.99</Text>
+            </View>
+            <View style={styles.billWrapper}>
+              <Text style={styles.billLabel}>Delivery Charges</Text>
+              <Text style={styles.billAmount}>₹ 27</Text>
+            </View>
+            <View style={styles.divider} />
+            <View style={styles.billWrapper}>
+              <Text style={styles.toPayLabel}>To Pay</Text>
+              <Text style={styles.toPay}>₹ 480</Text>
+            </View>
+            <Text style={styles.included}>Included all taxes and charges</Text>
+          </View>
         </View>
-        <View style={styles.section}>
-          <View style={styles.deliveryContainer}>
-            <Image source={AppIcons.coupon} />
-            <Text style={styles.couponTitle}>View Coupons and Offers</Text>
-          </View>
-        </View>
-        <View style={styles.section}>
-          <View style={styles.deliveryContainer}>
-            <Image source={AppIcons.bill} />
-            <Text style={styles.couponTitle}>Bill Summary</Text>
-          </View>
-          <View style={styles.billWrapper}>
-            <Text style={styles.billLabel}>Item Total & GST</Text>
-            <Text style={styles.billAmount}>₹ 200</Text>
-          </View>
-          <View style={styles.billWrapper}>
-            <Text style={styles.billLabel}>Handling Charges</Text>
-            <Text style={styles.billAmount}>₹ 9.99</Text>
-          </View>
-          <View style={styles.billWrapper}>
-            <Text style={styles.billLabel}>Delivery Charges</Text>
-            <Text style={styles.billAmount}>₹ 27</Text>
-          </View>
-          <View style={styles.divider} />
-          <View style={styles.billWrapper}>
-            <Text style={styles.toPayLabel}>To Pay</Text>
-            <Text style={styles.toPay}>₹ 480</Text>
-          </View>
-          <Text style={styles.included}>Included all taxes and charges</Text>
-        </View>
-      </View>
-      <AppButton title="Checkout" onPress={() => {}} />
+      </ScrollView>
+      <AppButton style={styles.button} title="Place Order" onPress={() => {}} />
     </BaseScreen>
   );
 };

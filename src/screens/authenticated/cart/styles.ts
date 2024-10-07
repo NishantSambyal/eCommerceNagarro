@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     padding: 16,
     flex: 1,
+    paddingBottom: 80,
   },
   section: {
     backgroundColor: colors.white.v1,
@@ -77,10 +78,20 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   listWrapper: {
-    marginBottom: 10,
+    marginVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  listItemWrapper: {
+    flexDirection: 'row',
+    backgroundColor: colors.red.v1,
+    paddingVertical: 4,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    borderColor: colors.red.v1,
+    borderWidth: 1,
+    borderRadius: 6,
   },
   itemTitle: {
     fontSize: 12,
@@ -104,6 +115,13 @@ const styles = StyleSheet.create({
     height: 1,
     width: '100%',
     backgroundColor: colors.black.v4,
+  },
+  button: {
+    backgroundColor: colors.red.v3,
+    position: 'absolute',
+    bottom: 10,
+    width: '80%',
+    alignSelf: 'center',
   },
 });
 
