@@ -39,6 +39,7 @@ const Login = () => {
         <Image source={AppImages.registration} />
         <Text style={styles.titleText}>Login</Text>
         <AppTextInput
+          testID="email-input"
           title="Email"
           placeholder="Enter Email"
           value={email}
@@ -46,6 +47,7 @@ const Login = () => {
           keyboardType="email-address"
         />
         <AppTextInput
+          testID="password-input"
           title="Password"
           placeholder="Enter password"
           value={password}
@@ -53,12 +55,14 @@ const Login = () => {
           secureTextEntry
         />
         <AppButton
+          testID="login-button"
           loading={loading}
           style={styles.buttonWrapper}
           title={'Login'}
           onPress={handleLogin}
         />
         <TouchableOpacity
+          testID="register-button"
           style={styles.newUserView}
           onPress={() => navigation.navigate('Registration')}>
           <Text style={styles.newUserText}>New User? Register Here</Text>

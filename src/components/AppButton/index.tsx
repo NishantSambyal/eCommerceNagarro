@@ -4,9 +4,12 @@ import styles from './styles';
 import { IProps } from './type';
 import colors from '../../utils/colors';
 
-const AppButton: FC<IProps> = ({ style, title, onPress, loading }) => {
+const AppButton: FC<IProps> = ({ style, title, onPress, loading, testID }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
+    <TouchableOpacity
+      testID={testID}
+      onPress={onPress}
+      style={[styles.container, style]}>
       {!loading && <Text style={styles.buttonText}>{title}</Text>}
       {loading && <ActivityIndicator color={colors.white.v1} />}
     </TouchableOpacity>
