@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   viewContainer: {
-    alignItems: 'center',
+    // alignItems: 'center',
   },
 });
 
