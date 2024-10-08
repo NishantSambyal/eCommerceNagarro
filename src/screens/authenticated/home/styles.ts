@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../../utils/colors';
 
 const styles = StyleSheet.create({
   grid: {
@@ -16,7 +17,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     alignSelf: 'stretch',
     shadowOffset: { x: 10, y: 10 },
-    backgroundColor: 'white',
     marginTop: 20,
     marginHorizontal: 10,
   },
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   },
   quantity: {
     fontSize: 16,
+    color: colors.black.v1,
   },
   dropdown: {
     height: 50,

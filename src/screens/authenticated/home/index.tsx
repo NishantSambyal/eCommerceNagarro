@@ -24,6 +24,7 @@ import { createOrderTables, fetchOrderHistory } from '../../../database/orders';
 import OrderList from '../orderList';
 import { useFocusEffect } from '@react-navigation/native';
 import { Dropdown } from 'react-native-element-dropdown';
+import { availableStates, transformStates } from '../../../utils/constants';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -195,18 +196,14 @@ const Home = () => {
               <OrderList userId={userReducer.data.id} />
               <Dropdown
                 style={styles.dropdown}
-                data={[
-                  { label: 'Delhi', value: 'Delhi' },
-                  { label: 'Haryana', value: 'Haryana' },
-                  { label: 'Punjab', value: 'Punjab' },
-                  { label: 'Rajasthan', value: 'Rajasthan' },
-                  { label: 'Maharashtra', value: 'Maharashtra' },
-                ]}
+                data={transformStates()}
                 labelField="label"
                 valueField="value"
                 placeholder="Select address"
                 value={selectedLocation}
                 onChange={item => handleLocationChange(item.value)}
+                itemTextStyle={{ color: 'black' }}
+                selectedTextStyle={{ color: 'black' }}
               />
             </View>
           }

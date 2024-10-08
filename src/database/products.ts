@@ -1,3 +1,4 @@
+import { availableStates } from '../utils/constants';
 import { openDatabase } from './authentication';
 
 export const createProductsTable = async () => {
@@ -80,15 +81,6 @@ export const insertProducts = async () => {
 
 const generateProducts = (count: number) => {
   const products = [];
-
-  // Define available locations
-  const availableStates = [
-    'Delhi',
-    'Haryana',
-    'Punjab',
-    'Rajasthan',
-    'Maharashtra',
-  ];
 
   for (let i = 1; i <= count; i++) {
     const name = `img${String(i).padStart(2, '0')}`; // Generates Item01, Item02, ...

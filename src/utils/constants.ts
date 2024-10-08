@@ -5,4 +5,19 @@ const STATUS_DATA = [
   { id: 4, status: 'Delivered' },
 ];
 
-export { STATUS_DATA };
+const availableStates = [
+  'Delhi',
+  'Haryana',
+  'Punjab',
+  'Rajasthan',
+  'Maharashtra',
+];
+
+const transformStates = () => {
+  return availableStates.map(state => ({
+    label: state,
+    value: state,
+  }));
+};
+
+export { STATUS_DATA, availableStates, transformStates };

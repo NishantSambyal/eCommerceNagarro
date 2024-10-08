@@ -31,7 +31,6 @@ const Route = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        navigationBarColor: '#00ff00',
       }}>
       {isLogin ? renderAuthStack() : renderHomeStack()}
     </Stack.Navigator>

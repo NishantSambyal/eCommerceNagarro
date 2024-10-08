@@ -23,8 +23,6 @@ const Login = () => {
       if (userDetails) {
         dispatch(loginUserR(userDetails));
         console.log(JSON.stringify(userDetails));
-        Alert.alert('Login successful');
-        // navigation.navigate('Home'); // Navigate to authenticated home screen
       } else {
         Alert.alert('Invalid credentials');
       }

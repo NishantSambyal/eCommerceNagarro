@@ -6,6 +6,7 @@ import styles from './styles';
 import { AppImages } from '../../../assets';
 import { useMyNavigation } from '../../../navigation/useMyNavigation';
 import { registerUser } from '../../../database/authentication';
+import { myAlertBox } from '../../../utils/alert';
 
 const Registration = () => {
   const [email, setEmail] = useState<string>('nishant@gmail.com');
@@ -29,8 +30,13 @@ const Registration = () => {
     setTimeout(async () => {
       try {
         await registerUser(email, strConfirmPassword, fullName);
-        Alert.alert('Registration successful');
-        navigation.navigate('Login'); // Navigate back to login
+        myAlertBox({
+          title: 'Registration Successful',
+          description: 'Registration successful. Please login',
+          onPress: () => {
+            navigation.navigate('Login');
+          },
+        });
       } catch (error) {
         Alert.alert('Registration Error:', error);
       } finally {

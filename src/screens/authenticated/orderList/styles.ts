@@ -18,6 +18,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
   },
+  statusText: {
+    color: colors.black.v1,
+  },
   title: {
     fontSize: 18,
     fontWeight: '600', // Medium bold for the title

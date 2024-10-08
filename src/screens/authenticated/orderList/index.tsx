@@ -75,9 +75,11 @@ const OrderList = ({ userId }) => {
                 </TouchableOpacity>
               </View>
             </View>
-            <Text>Status: {latestOrder.status}</Text>
-            <Text>Total: ₹ {latestOrder.total_amount.toFixed(2)}</Text>
-            <Text>
+            <Text style={styles.statusText}>Status: {latestOrder.status}</Text>
+            <Text style={styles.statusText}>
+              Total: ₹ {latestOrder.total_amount.toFixed(2)}
+            </Text>
+            <Text style={styles.statusText}>
               Date: {new Date(latestOrder.order_date).toLocaleString()}
             </Text>
             <OrderTracking currentStatus={latestOrder.status} />
