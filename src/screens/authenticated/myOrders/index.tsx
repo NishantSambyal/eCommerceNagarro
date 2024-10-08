@@ -40,6 +40,7 @@ const MyOrders = () => {
       <View style={styles.section}>
         <FlatList
           data={currentItems}
+          showsHorizontalScrollIndicator={false}
           horizontal={true} // Set to horizontal if you want it to scroll horizontally
           keyExtractor={innerItem => innerItem.order_item_id.toString()} // Use order_item_id for inner items
           renderItem={({ item: innerItem }) => {

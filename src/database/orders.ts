@@ -168,13 +168,13 @@ export const updateOrderStatus = async (orderId, status) => {
   });
 };
 
-export const fetchOrderHistory = async userId => {
+export const fetchOrderHistory = async (userId: number) => {
   const db = await openDatabase();
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'SELECT * FROM orders WHERE user_id = ?',
+        'SELECT * FROM orders WHERE user_id = ? ORDER BY order_date DESC', // Order by order_date in descending order
         [userId],
         (tx, results) => resolve(results.rows.raw()), // Fetch all orders
         error => reject(error),
