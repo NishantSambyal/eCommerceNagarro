@@ -23,10 +23,12 @@ import { myAlertBox } from '../../../utils/alert';
 import { createOrderTables, fetchOrderHistory } from '../../../database/orders';
 import OrderList from '../orderList';
 import { useFocusEffect } from '@react-navigation/native';
+import { Dropdown } from 'react-native-element-dropdown';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]); // Using an object to map product ID to quantity
+  const [selectedLocation, setSelectedLocation] = useState('Delhi');
   const userReducer = useSelector((state: RootState) => state.UserReducer);
 
   // Initialize database tables
@@ -99,6 +101,47 @@ const Home = () => {
     const updatedCartItems = await fetchCartItems(userReducer.data.id);
     setCart(updatedCartItems); // Update the cart state with fresh data
   };
+  const filterProductsByLocation = (products, location) => {
+    const filteredProducts = products.filter(product =>
+      product.available_in.includes(location),
+    );
+    setProducts(filteredProducts);
+  };
+
+  // const handleLocationChange = item => {
+  //   setSelectedLocation(item);
+  //   fetchProducts().then(product => filterProductsByLocation(product, item));
+  // };
+  const handleLocationChange = item => {
+    // If the selected location is the same as the current location, do nothing
+    if (item === selectedLocation) {
+      return;
+    }
+
+    // Check if there are items in the cart
+    if (cart.length > 0) {
+      // Warn the user that the cart will be cleared
+      myAlertBox({
+        title: 'Change Location',
+        description:
+          'Changing location will clear all items from your cart. Do you want to proceed?',
+        onPress: () => {
+          // If the user confirms, clear the cart and change the location
+          clearCart(userReducer.data.id); // Clear the cart in the database
+          setCart([]); // Reset local cart state
+          setSelectedLocation(item); // Update the selected location
+          // Fetch and filter products based on the new location
+          fetchProducts().then(product =>
+            filterProductsByLocation(product, item),
+          );
+        },
+      });
+    } else {
+      // If no items in cart, change the location directly
+      setSelectedLocation(item);
+      fetchProducts().then(product => filterProductsByLocation(product, item));
+    }
+  };
 
   const renderItem = ({ item }) => {
     const img = AppProducts[item.image_path];
@@ -148,7 +191,24 @@ const Home = () => {
           contentContainerStyle={styles.grid}
           ListHeaderComponent={
             // <HeaderComponent onClearCart={handleClearCart} />
-            <OrderList userId={userReducer.data.id} />
+            <View>
+              <OrderList userId={userReducer.data.id} />
+              <Dropdown
+                style={styles.dropdown}
+                data={[
+                  { label: 'Delhi', value: 'Delhi' },
+                  { label: 'Haryana', value: 'Haryana' },
+                  { label: 'Punjab', value: 'Punjab' },
+                  { label: 'Rajasthan', value: 'Rajasthan' },
+                  { label: 'Maharashtra', value: 'Maharashtra' },
+                ]}
+                labelField="label"
+                valueField="value"
+                placeholder="Select address"
+                value={selectedLocation}
+                onChange={item => handleLocationChange(item.value)}
+              />
+            </View>
           }
         />
       </View>

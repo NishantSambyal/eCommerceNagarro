@@ -55,6 +55,17 @@ const styles = StyleSheet.create({
   quantity: {
     fontSize: 16,
   },
+  dropdown: {
+    height: 50,
+    width: '90%', // Adjust width to fit your layout
+    borderColor: '#ccc', // Light grey border color
+    borderWidth: 1, // Thin border
+    borderRadius: 8, // Rounded corners
+    paddingHorizontal: 16, // Padding inside the dropdown
+    marginBottom: 20, // Space below the dropdown
+    alignSelf: 'center', // Center the dropdown horizontally
+    backgroundColor: 'white', // Background color
+  },
 });
 
 export default styles;
