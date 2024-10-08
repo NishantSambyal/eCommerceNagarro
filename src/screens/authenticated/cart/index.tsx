@@ -94,11 +94,15 @@ const Cart = () => {
         </View>
         <View style={styles.listItemWrapper}>
           <TouchableOpacity onPress={() => handleRemoveFromCart(item)}>
-            <Text style={styles.minus}>-</Text>
+            <View style={styles.minusWrapper}>
+              <Text style={styles.minus}>-</Text>
+            </View>
           </TouchableOpacity>
-          <Text>{quantity}</Text>
+          <Text style={styles.quantityText}>{quantity}</Text>
           <TouchableOpacity onPress={() => handleAddToCart(item)}>
-            <Text style={styles.plus}>+</Text>
+            <View style={styles.plusWrapper}>
+              <Text style={styles.plus}>+</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>

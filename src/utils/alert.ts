@@ -14,18 +14,25 @@ const myAlertBox = ({
   positiveTitle,
   onPress,
 }: IAlertProps) =>
-  Alert.alert(title, description, [
-    {
-      text: negativeTitle ?? 'Cancel',
-      onPress: () => console.log('Cancel Pressed'),
-      style: 'cancel',
-    },
-    {
-      text: positiveTitle ?? 'OK',
-      onPress: () => {
-        onPress && onPress();
+  Alert.alert(
+    title,
+    description,
+    [
+      {
+        text: negativeTitle ?? 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
       },
+      {
+        text: positiveTitle ?? 'OK',
+        onPress: () => {
+          onPress && onPress();
+        },
+      },
+    ],
+    {
+      cancelable: false,
     },
-  ]);
+  );
 
 export { myAlertBox };

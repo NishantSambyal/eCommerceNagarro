@@ -86,11 +86,10 @@ const styles = StyleSheet.create({
   listItemWrapper: {
     flexDirection: 'row',
     backgroundColor: colors.red.v1,
-    paddingVertical: 4,
+    // paddingVertical: 4,
     justifyContent: 'space-evenly',
     alignItems: 'center',
     borderColor: colors.red.v1,
-    borderWidth: 1,
     borderRadius: 6,
   },
   itemTitle: {
@@ -105,15 +104,29 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginTop: 6,
   },
+  plusWrapper: {
+    borderTopRightRadius: 6,
+    borderBottomRightRadius: 6,
+    backgroundColor: colors.red.v3,
+    paddingHorizontal: 10,
+    paddingVertical: 2,
+  },
   plus: {
     fontSize: 20,
-    marginRight: 10,
+  },
+  quantityText: {
+    paddingHorizontal: 15,
+    color: colors.black.v1,
+  },
+  minusWrapper: {
+    borderTopLeftRadius: 6,
+    borderBottomLeftRadius: 6,
+    backgroundColor: colors.red.v3,
     paddingHorizontal: 10,
+    paddingVertical: 2,
   },
   minus: {
     fontSize: 20,
-    marginLeft: 10,
-    paddingHorizontal: 10,
   },
   divider: {
     marginTop: 30,
