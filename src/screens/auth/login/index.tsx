@@ -10,8 +10,8 @@ import { useDispatch } from 'react-redux';
 import { loginUserR } from '../../../redux/reducers/slices/userSlice';
 
 const Login = () => {
-  const [email, setEmail] = useState<string>('nishant@gmail.com');
-  const [password, setPassword] = useState<string>('password');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const navigation = useMyNavigation();
   const dispatch = useDispatch();
