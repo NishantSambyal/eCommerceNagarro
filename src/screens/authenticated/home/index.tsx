@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import {
   createProductsTable,
@@ -22,40 +22,55 @@ import { RootState } from '../../../redux/store';
 import { myAlertBox } from '../../../utils/alert';
 import { createOrderTables, fetchOrderHistory } from '../../../database/orders';
 import OrderList from '../orderList';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]); // Using an object to map product ID to quantity
   const userReducer = useSelector((state: RootState) => state.UserReducer);
 
-  useEffect(() => {
-    createProductsTable();
-    insertProducts();
-    createCartTable();
-    createOrderTables();
-    createInventory;
-  }, []);
+  // Initialize database tables
+  useFocusEffect(
+    useCallback(() => {
+      createProductsTable();
+      insertProducts();
+      createCartTable();
+      createOrderTables();
+      createInventory;
+    }, []),
+  );
 
-  // Fetch products
-  useEffect(() => {
-    fetchProducts().then(product => setProducts(product));
-  }, []);
+  // Fetch products when the screen is focused
+  useFocusEffect(
+    useCallback(() => {
+      fetchProducts().then(product => setProducts(product));
+    }, []),
+  );
 
-  useEffect(() => {
-    fetchOrderHistory(userReducer.data.id).then(orders =>
-      console.log(JSON.stringify(orders, null, 4)),
-    );
-  }, []);
-  useEffect(() => {
-    const fetchCart = async () => {
-      const updatedCartItems = await fetchCartItems(userReducer.data.id);
-      setCart(updatedCartItems);
-    };
+  // Fetch order history when the screen is focused
+  useFocusEffect(
+    useCallback(() => {
+      if (userReducer.data.id) {
+        fetchOrderHistory(userReducer.data.id).then(orders =>
+          console.log(JSON.stringify(orders, null, 4)),
+        );
+      }
+    }, [userReducer.data.id]),
+  );
 
-    if (userReducer.data.id) {
-      fetchCart();
-    }
-  }, [userReducer.data.id]);
+  // Fetch cart items when the screen is focused
+  useFocusEffect(
+    useCallback(() => {
+      const fetchCart = async () => {
+        const updatedCartItems = await fetchCartItems(userReducer.data.id);
+        setCart(updatedCartItems);
+      };
+
+      if (userReducer.data.id) {
+        fetchCart();
+      }
+    }, [userReducer.data.id]),
+  );
 
   const handleClearCart = async () => {
     myAlertBox({
@@ -63,8 +78,7 @@ const Home = () => {
       description: 'Are you sure you want to clear your cart?',
       onPress: async () => {
         try {
-          const av = await clearCart(userReducer.data.id); // Clear the cart for the current user
-          console.log('av', av);
+          await clearCart(userReducer.data.id); // Clear the cart for the current user
           setCart([]); // Reset local cart state
           console.log('Cart cleared successfully');
         } catch (error) {
@@ -76,9 +90,7 @@ const Home = () => {
 
   const handleAddToCart = async item => {
     await addToCart(userReducer.data.id, item.id);
-    console.log(userReducer.data.id, item.id);
     const updatedCartItems = await fetchCartItems(userReducer.data.id);
-    console.log('updatedCartItems', updatedCartItems);
     setCart(updatedCartItems); // Update the cart state with fresh data
   };
 

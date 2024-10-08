@@ -40,6 +40,12 @@ const styles = StyleSheet.create({
     padding: 10,
     alignSelf: 'center',
   },
+  descriptionWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginHorizontal: 10,
+  },
 });
 
 export default styles;

@@ -59,13 +59,7 @@ const MyOrders = () => {
             );
           }}
         />
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginHorizontal: 10,
-          }}>
+        <View style={styles.descriptionWrapper}>
           <View>
             <Text style={styles.orderStatus}>Status: {item.status}</Text>
             <Text style={styles.placedText}>

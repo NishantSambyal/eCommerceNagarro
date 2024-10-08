@@ -5,6 +5,7 @@ const logout = require('./logout.png');
 const stopwatch = require('./stopwatch.png');
 const coupon = require('./coupon.png');
 const bill = require('./bill.png');
+const arrow = require('./arrow.png');
 
 const Icons = {
   back,
@@ -14,6 +15,7 @@ const Icons = {
   stopwatch,
   coupon,
   bill,
+  arrow,
 };
 
 export { Icons };

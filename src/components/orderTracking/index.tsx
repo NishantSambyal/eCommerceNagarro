@@ -1,13 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import colors from '../../utils/colors';
-
-const STATUS_DATA = [
-  { id: 1, status: 'Ordered' },
-  { id: 2, status: 'Shipped' },
-  { id: 3, status: 'Out for Delivery' },
-  { id: 4, status: 'Delivered' },
-];
+import { STATUS_DATA } from '../../utils/constants';
 
 const OrderTracking = ({ currentStatus }) => {
   const getStatusIndex = status =>
@@ -56,7 +50,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 20,
+    paddingTop: 20,
+    paddingBottom: 10,
   },
   trackerContainer: {
     flexDirection: 'row',
