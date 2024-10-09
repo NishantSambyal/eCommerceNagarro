@@ -12,9 +12,11 @@ const BaseScreen: FC<IProps | IPropsWithoutHeader> = ({
   scrollEnabled = true,
   noBackButton = false,
   cartCount,
+  testID,
 }) => {
   return (
     <SafeAreaView
+      testID={testID}
       edges={['right', 'left', 'top']}
       style={[styles.container, styles.mainContainer]}>
       {header && (

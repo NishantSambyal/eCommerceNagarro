@@ -9,4 +9,8 @@ module.exports = {
     'node_modules/(?!(react-redux|redux-persist|@react-native|react-navigation|react-native)/)', // Add necessary modules here
   ],
   setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/__mocks__/fileMock.js',
+    '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
+  },
 };

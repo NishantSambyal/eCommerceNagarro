@@ -5,6 +5,7 @@ export interface IProps {
   title: string;
   noBackButton?: boolean;
   cartCount?: string;
+  testID?: string;
 }
 
 export interface IPropsWithoutHeader {
@@ -14,4 +15,5 @@ export interface IPropsWithoutHeader {
   title?: string;
   noBackButton?: boolean;
   cartCount?: string;
+  testID?: string;
 }

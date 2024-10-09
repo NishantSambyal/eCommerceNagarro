@@ -24,7 +24,7 @@ import { createOrderTables, fetchOrderHistory } from '../../../database/orders';
 import OrderList from '../orderList';
 import { useFocusEffect } from '@react-navigation/native';
 import { Dropdown } from 'react-native-element-dropdown';
-import { availableStates, transformStates } from '../../../utils/constants';
+import { transformStates } from '../../../utils/constants';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -151,22 +151,34 @@ const Home = () => {
     const quantity = cartItem ? cartItem.quantity : 0; // Default to 0 if not found
 
     return (
-      <View style={styles.cardContainer}>
+      <View style={styles.cardContainer} testID={`product-${item.id}`}>
         <View style={styles.productContainer}>
-          <Image source={img} style={styles.image} />
-          <Text style={styles.productName}>{item.name}</Text>
-          <Text style={styles.productPrice}>₹ {item.price}</Text>
-          <View style={styles.cartContainer}>
+          <Image
+            source={img}
+            style={styles.image}
+            testID={`image-${item.id}`}
+          />
+          <Text style={styles.productName} testID={`name-${item.id}`}>
+            {item.name}
+          </Text>
+          <Text style={styles.productPrice} testID={`price-${item.id}`}>
+            ₹ {item.price}
+          </Text>
+          <View style={styles.cartContainer} testID={`cart-${item.id}`}>
             <TouchableOpacity
               onPress={() => handleRemoveFromCart(item)}
-              style={styles.button}>
+              style={styles.button}
+              testID={`decrease-${item.id}`}>
               <Text style={styles.buttonText}>-</Text>
             </TouchableOpacity>
-            <Text style={styles.quantity}>{quantity}</Text>
+            <Text style={styles.quantity} testID={`quantity-${item.id}`}>
+              {quantity}
+            </Text>
             {/* Use the updated quantity */}
             <TouchableOpacity
               onPress={() => handleAddToCart(item)}
-              style={styles.button}>
+              style={styles.button}
+              testID={`increase-${item.id}`}>
               <Text style={styles.buttonText}>+</Text>
             </TouchableOpacity>
           </View>
@@ -181,18 +193,20 @@ const Home = () => {
       header
       title={'\tWelcome, ' + userReducer.data.fullName}
       noBackButton
+      testID="home-screen"
       cartCount={getTotalCartItems(cart)}>
       <View style={{ alignItems: 'center', marginTop: 10 }}>
         <FlatList
           showsVerticalScrollIndicator={false}
           data={products}
+          testID="product-list"
           renderItem={renderItem}
           keyExtractor={item => item.id.toString()}
           numColumns={2}
           contentContainerStyle={styles.grid}
           ListHeaderComponent={
             // <HeaderComponent onClearCart={handleClearCart} />
-            <View>
+            <View testID="header">
               <OrderList userId={userReducer.data.id} />
               <Dropdown
                 style={styles.dropdown}
@@ -204,6 +218,7 @@ const Home = () => {
                 onChange={item => handleLocationChange(item.value)}
                 itemTextStyle={{ color: 'black' }}
                 selectedTextStyle={{ color: 'black' }}
+                testID="location-dropdown"
               />
             </View>
           }
