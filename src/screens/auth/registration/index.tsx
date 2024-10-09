@@ -51,6 +51,7 @@ const Registration = () => {
         <Image source={AppImages.registration} />
         <Text style={styles.titleText}>Registration</Text>
         <AppTextInput
+          testID="email-input"
           title="Email"
           placeholder="Enter Email"
           value={email}
@@ -58,6 +59,7 @@ const Registration = () => {
           keyboardType="email-address"
         />
         <AppTextInput
+          testID="password-input"
           title="Password"
           placeholder="Enter password"
           value={password}
@@ -65,6 +67,7 @@ const Registration = () => {
           secureTextEntry
         />
         <AppTextInput
+          testID="confirm-password-input"
           title="Confirm Password"
           placeholder="Enter confirm password"
           value={confirmPassword}
@@ -72,18 +75,21 @@ const Registration = () => {
           secureTextEntry
         />
         <AppTextInput
+          testID="fullname-input"
           title="Fullname"
           placeholder="Enter your full name"
           value={fullName}
           onChangeText={setFullName}
         />
         <AppButton
+          testID="register-button"
           loading={loading}
           style={styles.buttonWrapper}
           title={'Register'}
           onPress={handleRegistration}
         />
         <TouchableOpacity
+          testID="new-user-button"
           style={styles.newUserView}
           onPress={() => navigation.navigate('Login')}>
           <Text style={styles.newUserText}>
